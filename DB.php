@@ -9,7 +9,7 @@ class DB {
 
 	static private $_user = 'root';
 	static private $_pass = NULL;
-	static private $_connectionString = 'mysql:host=localhost;dbname=securities';
+	static private $_connectionString = 'mysql:host=localhost;dbname=accounts';
 	/*
 	static private $_user = 'root' : 'kairos');
 	static private $_pass = NULL : 'rC_1110_d3v');
@@ -135,5 +135,46 @@ class DB {
 			die();
 		}
 	}
+	
+	/**
+	 * 
+	 * @param string $statement
+	 * @param array $parameters 
+	 */
+	static function execute( $statement, $parameters = array() ) {
+		try {
+			$dbh = static::cn();
+			// ErrorLogs column or StocksWithErrors     column or Local Date Time
+			$stmt = $dbh->prepare( $statement );
+			/** @var PDOStatement */
+			$stmt->execute( $parameters);
+			echo $statement;
+			if ($stmt->errorCode()!=0) {
+				print_r( $parameters);
+				print_r( $stmt->errorInfo());
+			}
+		} catch (PDOException $e) {
+			print "Error!: " . $e->getMessage() . "\n\n";
+			die();
+		}
+	}
+
+	/**
+	 * 
+	 * @param string $statement
+	 * @param array $parameters 
+	 */
+	static function prepare( $statement, $options = array() ) {
+		try {
+			$dbh = static::cn();
+			$stmt = $dbh->prepare( $statement, $options );
+			return $stmt;
+		} catch (PDOException $e) {
+			print "Error!: " . $e->getMessage() . "\n\n";
+			die();
+		}
+	}
+	
+	
 
 }
