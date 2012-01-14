@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<account>
+  <created-at type="datetime">2011-11-16T15:03:58Z</created-at>
+  <id type="integer">832331</id>
+  <ssl-enabled type="boolean">true</ssl-enabled>
+  <updated-at type="datetime">2011-11-16T15:03:59Z</updated-at>
+  <name>My Project</name>
+  <plan>free</plan>
+  <account-holder-id type="integer">8470206</account-holder-id>
+  <created-on type="date" deprecated="true">2011-11-16</created-on>
+  <default-attachment-categories>
+    <category>Documents</category>
+    <category>Pictures</category>
+    <category>Sounds</category>
+  </default-attachment-categories>
+  <default-post-categories>
+    <category>Design</category>
+    <category>Code</category>
+    <category>Copywriting</category>
+    <category>Transcripts</category>
+    <category>Assets</category>
+    <category>Miscellaneous</category>
+  </default-post-categories>
+  <subscription>
+    <ssl type="boolean">true</ssl>
+    <projects type="integer">1</projects>
+    <writeboards type="integer">2</writeboards>
+    <name>Free</name>
+    <storage type="integer">10485760</storage>
+    <time-tracking type="boolean">false</time-tracking>
+  </subscription>
+  <firm>
+    <address-one nil="true"></address-one>
+    <address-two nil="true"></address-two>
+    <city nil="true"></city>
+    <country nil="true"></country>
+    <id type="integer">2812614</id>
+    <locale>en</locale>
+    <name>My Project</name>
+    <phone-number-fax nil="true"></phone-number-fax>
+    <phone-number-office nil="true"></phone-number-office>
+    <state nil="true"></state>
+    <time-zone-id>Central Time (US &amp; Canada)</time-zone-id>
+    <uuid>5677d150-54a5-3b3a-8ba0-06fe958c9b26</uuid>
+    <web-address nil="true"></web-address>
+    <zip nil="true"></zip>
+    <name>My Project</name>
+    <people type="array">
+      <person>
+        <client-id type="integer">0</client-id>
+        <created-at type="datetime">2011-11-16T15:03:58Z</created-at>
+        <id type="integer">8470206</id>
+        <im-handle nil="true"></im-handle>
+        <im-service nil="true"></im-service>
+        <phone-number-fax nil="true"></phone-number-fax>
+        <phone-number-home nil="true"></phone-number-home>
+        <phone-number-mobile nil="true"></phone-number-mobile>
+        <phone-number-office nil="true"></phone-number-office>
+        <phone-number-office-ext nil="true"></phone-number-office-ext>
+        <title nil="true"></title>
+        <updated-at type="datetime">2011-11-16T15:03:58Z</updated-at>
+        <uuid>2c1412da-21e0-33fd-a9b5-142f714ca610</uuid>
+        <name>John Adams</name>
+        <first-name>John</first-name>
+        <last-name>Adams</last-name>
+        <company-id type="integer">2812614</company-id>
+        <email-address>me@myproject.com</email-address>
+        <avatar-url>http://asset0.37img.com/global/missing/avatar.png?r=3</avatar-url>
+      </person>
+      <person>
+        <client-id type="integer">0</client-id>
+        <created-at type="datetime">2011-11-16T15:10:20Z</created-at>
+        <id type="integer">8470255</id>
+        <im-handle></im-handle>
+        <im-service>AOL</im-service>
+        <phone-number-fax></phone-number-fax>
+        <phone-number-home></phone-number-home>
+        <phone-number-mobile></phone-number-mobile>
+        <phone-number-office></phone-number-office>
+        <phone-number-office-ext></phone-number-office-ext>
+        <title></title>
+        <updated-at type="datetime">2011-11-16T15:10:20Z</updated-at>
+        <uuid>2c1412da-21e0-33fd-a9b5-142f714ca610</uuid>
+        <name>Jane Doe</name>
+        <first-name>Jane</first-name>
+        <last-name>Doe</last-name>
+        <company-id type="integer">2812614</company-id>
+        <email-address>me2@myproject.com</email-address>
+        <avatar-url>http://asset0.37img.com/global/missing/avatar.png?r=3</avatar-url>
+      </person>
+    </people>
+  </firm>
+  <clients type="array"/>
+  <projects type="array">
+    <project>
+      <created-on type="date">2011-11-16</created-on>
+      <id type="integer">8464822</id>
+      <last-changed-on type="datetime">2011-11-22T13:26:43Z</last-changed-on>
+      <name>My Project</name>
+      <status>active</status>
+      <name>My Project</name>
+      <calendar-events type="array">
+        <calendar-event>
+          <all-day type="boolean">true</all-day>
+          <created-on type="datetime">2011-11-16T15:17:33Z</created-on>
+          <creator-id type="integer">8470206</creator-id>
+          <id type="integer">26364997</id>
+          <project-id type="integer">8464822</project-id>
+          <title>Stage 2 Event</title>
+          <type>CalendarEvent</type>
+          <creator-name>John Adams</creator-name>
+          <due-at type="date">2011-12-10</due-at>
+          <start-at type="date">2011-12-09</start-at>
+        </calendar-event>
+      </calendar-events>
+      <company>
+        <id type="integer">2812614</id>
+        <name>My Project</name>
+        <name>My Project</name>
+      </company>
+      <milestones type="array">
+        <milestone>
+          <all-day type="boolean">true</all-day>
+          <commented-at type="datetime" nil="true"></commented-at>
+          <comments-count type="integer">0</comments-count>
+          <completed type="boolean">false</completed>
+          <created-on type="datetime">2011-11-16T15:17:03Z</created-on>
+          <creator-id type="integer">8470206</creator-id>
+          <id type="integer">26364977</id>
+          <project-id type="integer">8464822</project-id>
+          <responsible-party-id type="integer">8470206</responsible-party-id>
+          <responsible-party-type>Person</responsible-party-type>
+          <title>Stage 1 Milestone</title>
+          <wants-notification type="boolean">true</wants-notification>
+          <comments type="array"/>
+          <type>Milestone</type>
+          <creator-name>John Adams</creator-name>
+          <deadline type="date">2011-12-17</deadline>
+          <start-at type="date">2011-11-30</start-at>
+          <responsible-party-name>John Adams</responsible-party-name>
+        </milestone>
+        <milestone>
+          <all-day type="boolean">true</all-day>
+          <commented-at type="datetime" nil="true"></commented-at>
+          <comments-count type="integer">0</comments-count>
+          <completed type="boolean">false</completed>
+          <created-on type="datetime">2011-11-16T15:18:17Z</created-on>
+          <creator-id type="integer">8470206</creator-id>
+          <id type="integer">26365028</id>
+          <project-id type="integer">8464822</project-id>
+          <responsible-party-id type="integer">8470206</responsible-party-id>
+          <responsible-party-type>Person</responsible-party-type>
+          <start-at type="datetime" nil="true"></start-at>
+          <title>Stage 3 Milestone</title>
+          <wants-notification type="boolean">true</wants-notification>
+          <comments type="array"/>
+          <type>Milestone</type>
+          <creator-name>John Adams</creator-name>
+          <deadline type="date">2012-01-04</deadline>
+          <responsible-party-name>John Adams</responsible-party-name>
+        </milestone>
+      </milestones>
+      <post-categories type="array">
+        <post-category>
+          <elements-count type="integer">0</elements-count>
+          <id type="integer">85850062</id>
+          <name>Assets</name>
+          <project-id type="integer">8464822</project-id>
+          <name>Assets</name>
+          <type>PostCategory</type>
+        </post-category>
+        <post-category>
+          <elements-count type="integer">0</elements-count>
+          <id type="integer">85850059</id>
+          <name>Code</name>
+          <project-id type="integer">8464822</project-id>
+          <name>Code</name>
+          <type>PostCategory</type>
+        </post-category>
+        <post-category>
+          <elements-count type="integer">0</elements-count>
+          <id type="integer">85850060</id>
+          <name>Copywriting</name>
+          <project-id type="integer">8464822</project-id>
+          <name>Copywriting</name>
+          <type>PostCategory</type>
+        </post-category>
+        <post-category>
+          <elements-count type="integer">0</elements-count>
+          <id type="integer">85850058</id>
+          <name>Design</name>
+          <project-id type="integer">8464822</project-id>
+          <name>Design</name>
+          <type>PostCategory</type>
+        </post-category>
+        <post-category>
+          <elements-count type="integer">0</elements-count>
+          <id type="integer">85850063</id>
+          <name>Miscellaneous</name>
+          <project-id type="integer">8464822</project-id>
+          <name>Miscellaneous</name>
+          <type>PostCategory</type>
+        </post-category>
+        <post-category>
+          <elements-count type="integer">0</elements-count>
+          <id type="integer">85850061</id>
+          <name>Transcripts</name>
+          <project-id type="integer">8464822</project-id>
+          <name>Transcripts</name>
+          <type>PostCategory</type>
+        </post-category>
+      </post-categories>
+      <posts type="array">
+        <post>
+          <attachments-count type="integer">1</attachments-count>
+          <author-id type="integer">8470206</author-id>
+          <body>&lt;div&gt;This is an example of a posted message with an attached file about business process notation, this message relates to milestone 1 and subscribes John Adams to all email notifications&lt;br /&gt;&lt;/div&gt;</body>
+          <category-id type="integer" nil="true"></category-id>
+          <commented-at type="datetime" nil="true"></commented-at>
+          <comments-count type="integer">0</comments-count>
+          <id type="integer">54353437</id>
+          <milestone-id type="integer">26364977</milestone-id>
+          <posted-on type="datetime">2011-11-16T15:28:20Z</posted-on>
+          <project-id type="integer">8464822</project-id>
+          <title>Posted Message</title>
+          <use-textile type="boolean">false</use-textile>
+          <author-name>John Adams</author-name>
+          <comments type="array"/>
+          <extended-body deprecated="true"></extended-body>
+        </post>
+      </posts>
+      <time-entries type="array"/>
+      <todo-lists type="array">
+        <todo-list>
+          <completed-count type="integer">0</completed-count>
+          <description>stage 3 action item list description</description>
+          <id type="integer">17201671</id>
+          <milestone-id type="integer">26365028</milestone-id>
+          <name>Stage 3 action items</name>
+          <position type="integer">1</position>
+          <project-id type="integer">8464822</project-id>
+          <tracked type="boolean">false</tracked>
+          <uncompleted-count type="integer">2</uncompleted-count>
+          <name>Stage 3 action items</name>
+          <todo-items type="array">
+            <todo-item>
+              <commented-at type="datetime" nil="true"></commented-at>
+              <comments-count type="integer">0</comments-count>
+              <completed type="boolean">false</completed>
+              <content>Create prototype 1</content>
+              <created-at type="datetime">2011-11-16T15:24:08Z</created-at>
+              <creator-id type="integer">8470206</creator-id>
+              <due-at type="datetime">2011-11-17T06:00:00Z</due-at>
+              <id type="integer">114637894</id>
+              <position type="integer">1</position>
+              <responsible-party-id type="integer">8470255</responsible-party-id>
+              <responsible-party-type>Person</responsible-party-type>
+              <todo-list-id type="integer">17201671</todo-list-id>
+              <updated-at type="datetime">2011-11-16T15:24:08Z</updated-at>
+              <comments type="array"/>
+              <responsible-party-name>Jane Doe</responsible-party-name>
+              <created-on type="datetime" deprecated="true">2011-11-16T15:24:08Z</created-on>
+              <creator-name>John Adams</creator-name>
+            </todo-item>
+            <todo-item>
+              <commented-at type="datetime" nil="true"></commented-at>
+              <comments-count type="integer">0</comments-count>
+              <completed type="boolean">false</completed>
+              <content>Create prototype 2</content>
+              <created-at type="datetime">2011-11-16T15:24:55Z</created-at>
+              <creator-id type="integer">8470206</creator-id>
+              <due-at type="datetime">2012-01-02T06:00:00Z</due-at>
+              <id type="integer">114638086</id>
+              <position type="integer">2</position>
+              <responsible-party-id type="integer">8470255</responsible-party-id>
+              <responsible-party-type>Person</responsible-party-type>
+              <todo-list-id type="integer">17201671</todo-list-id>
+              <updated-at type="datetime">2011-11-16T15:24:55Z</updated-at>
+              <comments type="array"/>
+              <responsible-party-name>Jane Doe</responsible-party-name>
+              <created-on type="datetime" deprecated="true">2011-11-16T15:24:55Z</created-on>
+              <creator-name>John Adams</creator-name>
+            </todo-item>
+          </todo-items>
+          <completed type="boolean">false</completed>
+          <complete deprecated="true">false</complete>
+        </todo-list>
+        <todo-list>
+          <completed-count type="integer">0</completed-count>
+          <description></description>
+          <id type="integer">17201625</id>
+          <milestone-id type="integer">26364997</milestone-id>
+          <name>Stage 2 Action Items</name>
+          <position type="integer">2</position>
+          <project-id type="integer">8464822</project-id>
+          <tracked type="boolean">false</tracked>
+          <uncompleted-count type="integer">2</uncompleted-count>
+          <name>Stage 2 Action Items</name>
+          <todo-items type="array">
+            <todo-item>
+              <commented-at type="datetime" nil="true"></commented-at>
+              <comments-count type="integer">0</comments-count>
+              <completed type="boolean">false</completed>
+              <content>Geometric Envelope</content>
+              <created-at type="datetime">2011-11-16T15:22:18Z</created-at>
+              <creator-id type="integer">8470206</creator-id>
+              <due-at type="datetime">2011-12-09T06:00:00Z</due-at>
+              <id type="integer">114637538</id>
+              <position type="integer">1</position>
+              <responsible-party-id type="integer">8470206</responsible-party-id>
+              <responsible-party-type>Person</responsible-party-type>
+              <todo-list-id type="integer">17201625</todo-list-id>
+              <updated-at type="datetime">2011-11-16T15:22:18Z</updated-at>
+              <comments type="array"/>
+              <responsible-party-name>John Adams</responsible-party-name>
+              <created-on type="datetime" deprecated="true">2011-11-16T15:22:18Z</created-on>
+              <creator-name>John Adams</creator-name>
+            </todo-item>
+            <todo-item>
+              <commented-at type="datetime" nil="true"></commented-at>
+              <comments-count type="integer">0</comments-count>
+              <completed type="boolean">false</completed>
+              <content>Determine test plan</content>
+              <created-at type="datetime">2011-11-16T15:22:41Z</created-at>
+              <creator-id type="integer">8470206</creator-id>
+              <due-at type="datetime">2011-12-07T06:00:00Z</due-at>
+              <id type="integer">114637605</id>
+              <position type="integer">2</position>
+              <responsible-party-id type="integer">8470206</responsible-party-id>
+              <responsible-party-type>Person</responsible-party-type>
+              <todo-list-id type="integer">17201625</todo-list-id>
+              <updated-at type="datetime">2011-11-16T15:22:41Z</updated-at>
+              <comments type="array"/>
+              <responsible-party-name>John Adams</responsible-party-name>
+              <created-on type="datetime" deprecated="true">2011-11-16T15:22:41Z</created-on>
+              <creator-name>John Adams</creator-name>
+            </todo-item>
+          </todo-items>
+          <completed type="boolean">false</completed>
+          <complete deprecated="true">false</complete>
+        </todo-list>
+        <todo-list>
+          <completed-count type="integer">0</completed-count>
+          <description></description>
+          <id type="integer">17201581</id>
+          <milestone-id type="integer">26364977</milestone-id>
+          <name>Milestone 1 Action Items</name>
+          <position type="integer">3</position>
+          <project-id type="integer">8464822</project-id>
+          <tracked type="boolean">false</tracked>
+          <uncompleted-count type="integer">2</uncompleted-count>
+          <name>Milestone 1 Action Items</name>
+          <todo-items type="array">
+            <todo-item>
+              <commented-at type="datetime" nil="true"></commented-at>
+              <comments-count type="integer">0</comments-count>
+              <completed type="boolean">false</completed>
+              <content>Internal Project proposal</content>
+              <created-at type="datetime">2011-11-16T15:20:48Z</created-at>
+              <creator-id type="integer">8470206</creator-id>
+              <due-at type="datetime">2011-11-17T06:00:00Z</due-at>
+              <id type="integer">114637287</id>
+              <position type="integer">1</position>
+              <todo-list-id type="integer">17201581</todo-list-id>
+              <updated-at type="datetime">2011-11-16T15:20:48Z</updated-at>
+              <comments type="array"/>
+              <created-on type="datetime" deprecated="true">2011-11-16T15:20:48Z</created-on>
+              <creator-name>John Adams</creator-name>
+            </todo-item>
+            <todo-item>
+              <commented-at type="datetime" nil="true"></commented-at>
+              <comments-count type="integer">0</comments-count>
+              <completed type="boolean">false</completed>
+              <content>Marketing Specification</content>
+              <created-at type="datetime">2011-11-16T15:21:13Z</created-at>
+              <creator-id type="integer">8470206</creator-id>
+              <due-at type="datetime">2011-11-17T06:00:00Z</due-at>
+              <id type="integer">114637346</id>
+              <position type="integer">2</position>
+              <responsible-party-id type="integer">8470255</responsible-party-id>
+              <responsible-party-type>Person</responsible-party-type>
+              <todo-list-id type="integer">17201581</todo-list-id>
+              <updated-at type="datetime">2011-11-16T15:21:13Z</updated-at>
+              <comments type="array"/>
+              <responsible-party-name>Jane Doe</responsible-party-name>
+              <created-on type="datetime" deprecated="true">2011-11-16T15:21:13Z</created-on>
+              <creator-name>John Adams</creator-name>
+            </todo-item>
+          </todo-items>
+          <completed type="boolean">false</completed>
+          <complete deprecated="true">false</complete>
+        </todo-list>
+      </todo-lists>
+      <attachment-categories type="array">
+        <attachment-category>
+          <elements-count type="integer">1</elements-count>
+          <id type="integer">85850064</id>
+          <name>Documents</name>
+          <project-id type="integer">8464822</project-id>
+          <name>Documents</name>
+          <type>AttachmentCategory</type>
+        </attachment-category>
+        <attachment-category>
+          <elements-count type="integer">0</elements-count>
+          <id type="integer">85850065</id>
+          <name>Pictures</name>
+          <project-id type="integer">8464822</project-id>
+          <name>Pictures</name>
+          <type>AttachmentCategory</type>
+        </attachment-category>
+        <attachment-category>
+          <elements-count type="integer">0</elements-count>
+          <id type="integer">85850066</id>
+          <name>Sounds</name>
+          <project-id type="integer">8464822</project-id>
+          <name>Sounds</name>
+          <type>AttachmentCategory</type>
+        </attachment-category>
+      </attachment-categories>
+      <participants>
+        <person type="integer">8470206</person>
+        <person type="integer">8470255</person>
+      </participants>
+    </project>
+  </projects>
+</account>
