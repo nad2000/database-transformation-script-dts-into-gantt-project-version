@@ -161,7 +161,8 @@ CREATE TABLE todo_list (
     name VARCHAR(255) NULL,
     position INTEGER,
     tracked BOOLEAN,
-    uncompleted_count INTEGER);
+    uncompleted_count INTEGER,
+    completed BOOLEAN);
           
 DROP TABLE IF EXISTS todo_item CASCADE;
 CREATE TABLE todo_item (
@@ -193,7 +194,7 @@ CREATE TABLE attachment_category (
     
 DROP TABLE IF EXISTS participant CASCADE;
 CREATE TABLE participant (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     project_id INT NOT NULL,
     person_id INT NOT NULL,
     UNIQUE (project_id,person_id));

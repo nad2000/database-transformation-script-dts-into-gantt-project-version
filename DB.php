@@ -135,18 +135,18 @@ class DB {
 			die();
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param string $statement
-	 * @param array $parameters 
+	 * @param array $parameters
 	 */
 	static function execute( $statement, $parameters = array() ) {
 		try {
 			$stmt = static::prepare( $statement );
 			/** @var PDOStatement */
 			$stmt->execute( $parameters);
-			if ($stmt->errorCode()!=0) {
+			if ((int)$stmt->errorCode()!=0) {
 				print_r( $parameters);
 				print_r( $stmt->errorInfo());
 			}
@@ -157,9 +157,9 @@ class DB {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param string $statement
-	 * @param array $parameters 
+	 * @param array $parameters
 	 */
 	static function prepare( $statement, $options = array() ) {
 		echo "\n\n".$statement;
@@ -172,7 +172,7 @@ class DB {
 			die();
 		}
 	}
-	
-	
+
+
 
 }
