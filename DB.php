@@ -143,12 +143,9 @@ class DB {
 	 */
 	static function execute( $statement, $parameters = array() ) {
 		try {
-			$dbh = static::cn();
-			// ErrorLogs column or StocksWithErrors     column or Local Date Time
-			$stmt = $dbh->prepare( $statement );
+			$stmt = static::prepare( $statement );
 			/** @var PDOStatement */
 			$stmt->execute( $parameters);
-			echo $statement;
 			if ($stmt->errorCode()!=0) {
 				print_r( $parameters);
 				print_r( $stmt->errorInfo());
@@ -165,6 +162,7 @@ class DB {
 	 * @param array $parameters 
 	 */
 	static function prepare( $statement, $options = array() ) {
+		echo "\n\n".$statement;
 		try {
 			$dbh = static::cn();
 			$stmt = $dbh->prepare( $statement, $options );

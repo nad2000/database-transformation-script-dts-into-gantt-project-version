@@ -52,14 +52,17 @@ class AccountTransformer {
 		if (array_key_exists('category', $arr) ) {
 			$sql = "INSERT IGNORE INTO $tableName (account_id,category) VALUES (?,?);";
 			$stmt = DB::prepare( $sql);
-			//DB::execute( $sql, $valList);
 			foreach( $arr['category'] as $cat ) {
 				$stmt->execute( array($this->account_id,$cat) );
-				//print_r( $stmt->errorInfo());
 			}
 			return;
 		}
-		$finals = array_filter($arr, "is_string");
+		$finals = array();
+		foreach ($arr as $key => $value) {
+			if ( is_string($value) ) $finals[$key] = $value;
+			// Ommit duplicate 'name' elements
+			elseif ( $value instanceof SimpleXMLElement && $key=='name') $finals[$key] = $value[0]; 
+		}
 		if ( count($finals)==0 ) return;
 		if ( $elName=='account') {
 			$this->account_id = $arr['id'];
@@ -79,7 +82,6 @@ class AccountTransformer {
 		$mapStr = implode(',', $map);
 		$sql .= $mapStr . ' ON DUPLICATE KEY UPDATE ' . $mapStr . ';';
 		DB::execute( $sql, $valList);
-		echo $sql;
 		foreach( $arr as $subEl ) {
 			if ( !is_string($subEl) ) {
 				$this->importElement( $subEl);
