@@ -26,6 +26,7 @@ class DB {
 						static::$_connectionString,
 						static::$_user,
 						static::$_pass );
+			static::$_dbh->exec("SET TIME_ZONE='+00:00'");
 		}
 		return static::$_dbh;
 	}
@@ -162,17 +163,15 @@ class DB {
 	 * @param array $parameters
 	 */
 	static function prepare( $statement, $options = array() ) {
-		echo "\n\n".$statement;
 		try {
 			$dbh = static::cn();
 			$stmt = $dbh->prepare( $statement, $options );
 			return $stmt;
 		} catch (PDOException $e) {
 			print "Error!: " . $e->getMessage() . "\n\n";
+			print "Statement: " . $statement;
 			die();
 		}
 	}
-
-
 
 }
