@@ -7,17 +7,17 @@
  * @author Radomirs Cirskis (nad2000@gmail.com)
  */
 class GanttProject {
-	
+
 	/** @var SimpleXMLElement $el */
 	private $el;
-	
+
 	/** @var SimpleXMLElement $current_project */
 	private $current_project;
-	
+
 	/**
 	 * Single element value or array or element values mathing xpath
-	 * 
-	 * @param string $xpath 
+	 *
+	 * @param string $xpath
 	 * @return sting or array() of sting or SimpleXMLElement
 	 */
 	public function xpVal($xpath, $el=NULL) {
@@ -32,7 +32,7 @@ class GanttProject {
 	/**
 	 *
 	 * @param string $filename
-	 * @return SimpleXMLElement 
+	 * @return SimpleXMLElement
 	 */
 	public function transform($filename) {
 		/**
@@ -43,7 +43,7 @@ class GanttProject {
 		return $this->transformIntoProjects( $account);
 
 	}
-	
+
 	/**
 	 * @param SimpleXMLElement $account
 	 * @return array() of SimpleXMLElement
@@ -53,29 +53,31 @@ class GanttProject {
 
 		/** @var SimpleXMLElement $el */
 		$this->el = $el = $account;
-		
+
 		$this->_errors = array();
 
 		// Return Lines
 		$returnLines = array();
-		
+		$projects = $account->xpath('//project');
+		/** @var SimpleXMLElement $proj */
+		$proj = $projects[0];
 		// generating teh document:
 		ob_start();
 		echo "<?xml version=\"1.0\"?>\n";
 		?>
 <project
-	name="<?php echo $this->xpVal('/account/plan', $el)?>" 
-	company="My Organization" 
-	webLink="http://www.company.com" 
-	view-date="2012-01-16" view-index="1" 
-	gantt-divider-location="353" 
-	resource-divider-location="300" 
+	name="<?=$proj->name[0]?>"
+	company="<?=$el->firm->name[0]?>"
+	webLink="<?=$el->firm->{'web-address'}?>"
+	view-date="2012-01-16" view-index="1"
+	gantt-divider-location="353"
+	resource-divider-location="300"
 	version="2.0">
-    <description><![CDATA[XXX UUU ADD ]]></description>
+    <description><![CDATA[Project generated form Basecamp account file "<?=$el->name?>"]]></description>
     <view zooming-state="default:0" id="gantt-chart"/>
     <view id="resource-table">
-        <field id="0" name="Name" width="70" order="0"/>
-        <field id="1" name="Default role" width="29" order="1"/>
+        <field id="0" name="Name" width="70" order="1"/>
+        <field id="1" name="Default role" width="29" order="0"/>
     </view>
     <!-- -->
     <calendars>
@@ -103,7 +105,14 @@ class GanttProject {
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
             <taskproperty id="784873824" name="Custom" type="custom" valuetype="text" defaultvalue="Custom Value"/>
-        </taskproperties>
+        </taskproperties><?php
+		foreach ( $proj->{'calendar-events'} as $event ) {
+			echo <<<EOD
+			<task id="{$event->id}" name="{$event->title}" color="#8cb6ce"
+				meeting="false" start="{$event->{"start-at"}}" duration="1" complete="0" expand="true"/>
+EOD;
+		}
+		?>
         <task id="888" name="Stage 1 Milestone" color="#8cb6ce" meeting="true" start="2012-01-16" duration="1" complete="0" expand="true">
             <depend id="1" type="2" difference="0" hardness="Strong"/>
         </task>
@@ -155,7 +164,7 @@ class GanttProject {
 <?php
 		$xmlStr=ob_get_contents();
 		ob_end_clean();
-		
+
 		print $xmlStr;
 
 		$this->_raw = $xmlStr;
@@ -169,10 +178,10 @@ class GanttProject {
 }
 
 /**
- * 
+ *
  * @param type $el
- * @param type $xpath 
+ * @param type $xpath
  */
 function elVal($el, $xpath) {
-	
+
 }
