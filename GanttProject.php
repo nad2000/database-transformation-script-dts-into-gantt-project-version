@@ -1,6 +1,25 @@
 <?php
 
 /**
+ *
+ * @param SimpleXMLElement $el Mailstone, event, or todo-item element
+ * @return int Task duration in days
+ */
+function TaskDuration($el) {
+	if ( $el->getName()=='todo-item'){
+		$start =  $el->{'created-on'};
+		$end = $el->{'due-at'};
+	} else {
+		$start =  $el->{'start-at'};
+		$end = $el->deadline;
+	}
+	$startTs = strtotime((string)$start);
+	$endTs = strtotime((string)$end);
+	$diff = $endTs - $startTs;
+	return (int)round($diff / 86400.);
+} 
+
+/**
  * Account project XML document transfromer into
  * Gantt Project version 2.5 'Praha' XML format
  *
@@ -46,21 +65,31 @@ class GanttProject {
 
 	/**
 	 * @param SimpleXMLElement $account
-	 * @return array() of SimpleXMLElement
 	 */
-	public function transformIntoProjects(
-		$account ) {
-
+	public function transformIntoProjects( $account) {
 		/** @var SimpleXMLElement $el */
-		$this->el = $el = $account;
-
+		$this->account = $this->el = $el = $account;
 		$this->_errors = array();
 
 		// Return Lines
 		$returnLines = array();
 		$projects = $account->xpath('//project');
-		/** @var SimpleXMLElement $proj */
-		$proj = $projects[0];
+		foreach( $projects as $proj) {
+			$projectName = (string)$proj->name[0];
+			/** @var SimpleXMLElement $xml */
+			$xml = $this->transformIntoProject($proj);
+			$xml->saveXML( $projectName.".xml" );
+		}
+		
+	}
+	
+	/**
+	 * @param SimpleXMLElement $proj
+	 * @return array() of SimpleXMLElement
+	 */
+	public function transformIntoProject( $proj  ) {
+
+		$account = $el = $this->account;
 		// generating teh document:
 		ob_start();
 		echo "<?xml version=\"1.0\"?>\n";
@@ -69,15 +98,15 @@ class GanttProject {
 	name="<?=$proj->name[0]?>"
 	company="<?=$el->firm->name[0]?>"
 	webLink="<?=$el->firm->{'web-address'}?>"
-	view-date="2012-01-16" view-index="1"
+	view-date="2012-01-16" view-index="0"
 	gantt-divider-location="353"
 	resource-divider-location="300"
-	version="2.0">
+	version="2.0"> 
     <description><![CDATA[Project generated form Basecamp account file "<?=$el->name?>"]]></description>
-    <view zooming-state="default:0" id="gantt-chart"/>
+    <view zooming-state="default:1" id="gantt-chart"/>
     <view id="resource-table">
-        <field id="0" name="Name" width="70" order="1"/>
         <field id="1" name="Default role" width="29" order="0"/>
+        <field id="0" name="Name" width="70" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -106,28 +135,76 @@ class GanttProject {
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
             <taskproperty id="784873824" name="Custom" type="custom" valuetype="text" defaultvalue="Custom Value"/>
         </taskproperties><?php
-		foreach ( $proj->{'calendar-events'} as $event ) {
-			echo <<<EOD
+		// Events:
+		foreach ( $proj->{'calendar-events'}->event as $event ) echo <<<EOD
 			<task id="{$event->id}" name="{$event->title}" color="#8cb6ce"
 				meeting="false" start="{$event->{"start-at"}}" duration="1" complete="0" expand="true"/>
 EOD;
+		// Milestones:
+		foreach ( $proj->milestones->milestone as $ms ) {
+			$duration = TaskDuration($ms);
+			echo <<<EOD
+			<task 
+				id="{$ms->id}" name="{$ms->title}" color="#660000"
+				meeting="true" start="{$event->{"start-at"}}" 
+				duration="{$duration}" complete="0" expand="true"/>
+EOD;
+		}
+		foreach ( $proj->{'todo-lists'}->{'todo-list'} as $todoList ) {
+			$msId = (int)$todoList->{'milestone-id'};
+			echo <<<EOD
+			<task 
+				id="{$todoList->id}" name="{$todoList->name[0]}" color="#ccffcc"
+				meeting="true" expand="true">
+				<depend id="{$msId}" type="2" difference="0" hardness="Strong"/>
+			</task>
+EOD;
+			foreach ($todoList->{'todo-items'}->{'todo-item'} as $todo ) {
+				$completed = (string)$todo->completed == 'true' ? 1 : 0;
+				$duration = TaskDuration($todo);
+				echo <<<EOD
+			<task 
+				id="{$todo->id}" name="{$todo->content}" color="#8cb6ce"
+				meeting="false" start="{$todo->{'created-on'}}" 
+				duration="{$duration}" complete="{$completed}" expand="true">
+				<depend id="{$todoList->id}" type="2" difference="0" hardness="Strong"/>
+			</task>
+EOD;
+			}
 		}
 		?>
-        <task id="888" name="Stage 1 Milestone" color="#8cb6ce" meeting="true" start="2012-01-16" duration="1" complete="0" expand="true">
-            <depend id="1" type="2" difference="0" hardness="Strong"/>
-        </task>
-        <task id="1" name="_1" color="#8cb6ce" meeting="false" start="2012-01-17" duration="1" complete="0" expand="true"/>
-        <task id="2" name="_2" color="#8cb6ce" meeting="false" start="2012-01-16" duration="1" complete="0" expand="true">
-            <depend id="1" type="2" difference="0" hardness="Strong"/>
-        </task>
     </tasks>
-    <resources>
-        <resource id="0" name="Jane Doe" function="Default:0" contacts="me@myproject.com" phone=""/>
-        <resource id="1" name="John Adams" function="Default:0" contacts="me2@myproject.com" phone=""/>
+    <resources><?php
+		foreach ($el->firm->people->person as $person) echo <<<EOD
+		<resource id="{$person->id}" 
+			name="{$person->name}" 
+			function="Default:0" 
+			contacts="{$person->{'email-address'}}" 
+			phone="{$person->{'phone-number-office'}}" />
+EOD;
+	?>
     </resources>
-    <allocations>
-        <allocation task-id="888" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
-        <allocation task-id="1" resource-id="1" function="Default:0" responsible="true" load="80.0"/>
+    <allocations><?php
+		foreach ( $proj->{'calendar-events'}->event as $event ) echo <<<EOD
+        <allocation 
+			task-id="{$event->id}" resource-id="{$event->{'creator-id'}}" 
+			function="Default:0" responsible="true" load="100.0"/>
+EOD;
+		foreach ( $proj->milestones->milestone as $ms ) echo <<<EOD
+        <allocation 
+			task-id="{$ms->id}" resource-id="{$ms->{'responsible-party-id'}}" 
+			function="Default:0" responsible="true" load="100.0"/>
+EOD;
+			foreach ($todoList->{'todo-items'}->{'todo-item'} as $todo ) {
+				$completed = (string)$todo->completed == 'true' ? 1 : 0;
+				$duration = TaskDuration($todo);
+				echo <<<EOD
+        <allocation 
+			task-id="{$todo->id}" resource-id="{$todo->{'responsible-party-id'}}" 
+			function="Default:0" responsible="true" load="100.0"/>
+EOD;
+			}
+	?>
     </allocations>
     <vacations/>
     <taskdisplaycolumns>
@@ -142,21 +219,16 @@ EOD;
         <displaycolumn property-id="tpd3" order="0" width="152" visible="true"/>
         <displaycolumn property-id="tpd4" order="1" width="59" visible="true"/>
         <displaycolumn property-id="tpd5" order="2" width="60" visible="true"/>
-        <displaycolumn property-id="784873824" order="3" width="78" visible="true"/>
+        <displaycolumn property-id="784873824" order="3" width="78" visible="false"/>
     </taskdisplaycolumns>
-    <previous>
-        <previous-tasks name="xxxx">
-            <previous-task id="888" start="2012-01-16" duration="1" meeting="true" super="false"/>
-            <previous-task id="2" start="2012-01-16" duration="1" meeting="false" super="false"/>
-            <previous-task id="1" start="2012-01-17" duration="1" meeting="false" super="false"/>
-        </previous-tasks>
-    </previous>
+    <previous/>
     <roles roleset-name="Default"/>
     <roles roleset-name="SoftwareDevelopment"/>
-    <roles> <?php
+    <roles><?php
 		foreach ($el->firm->people->person as $person) {
-			echo '
-		<role id="'.(string)$person->id.'" name="'.(string)$person->name.'"/>';
+			echo <<<EOD
+		<role id="{$person->id}" name="{$person->name}"/>
+EOD;
 		}
 	?>
     </roles>
@@ -165,7 +237,7 @@ EOD;
 		$xmlStr=ob_get_contents();
 		ob_end_clean();
 
-		print $xmlStr;
+		// print $xmlStr;
 
 		$this->_raw = $xmlStr;
 		$this->_xml = simplexml_load_string($xmlStr);
@@ -175,13 +247,4 @@ EOD;
 		return $this->_xml;
 
 	}
-}
-
-/**
- *
- * @param type $el
- * @param type $xpath
- */
-function elVal($el, $xpath) {
-
 }
