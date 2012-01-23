@@ -50,16 +50,18 @@ class GanttProject {
 
 	/**
 	 *
-	 * @param string $filename
+	 * @param string $filename Basecamp Account XML file
+	 * @param string $destDir Directry where to store Gantt Project files
 	 * @return SimpleXMLElement
 	 */
-	public function transform($filename) {
+	public function transform($filename, $destDir = '.') {
 		/**
 		 * @var $account SimpleXMLElement account XML file transformed into object
 		 */
-		$account = $this->account = simplexml_load_file ( $filename);
+		$this->account = $account = simplexml_load_file ( $filename);
+		$this->destDirectory = realpath( $destDir);
 		//print_r($account);
-		return $this->transformIntoProjects( $account);
+		return $this->transformIntoProjects( $account, $destDir);
 
 	}
 
@@ -76,9 +78,10 @@ class GanttProject {
 		$projects = $account->xpath('//project');
 		foreach( $projects as $proj) {
 			$projectName = (string)$proj->name[0];
+			$projectFilename = realpath( $this->destDirectory .'/'. $projectName.".xml");
 			/** @var SimpleXMLElement $xml */
 			$xml = $this->transformIntoProject($proj);
-			$xml->saveXML( $projectName.".xml" );
+			$xml->saveXML( $projectFilename);
 		}
 		
 	}
