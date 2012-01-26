@@ -161,7 +161,7 @@ class AccountTransformer {
 	 */
 	function depluralize($word){
 		// Loop through all the rules and do the replacement.
-		foreach (static::$__depluralizeRules as $key => $value) {
+		foreach (self::$__depluralizeRules as $key => $value) {
 			// If the end of the word doesn't match the key,
 			// it's not a candidate for replacement. Move on
 			// to the next plural ending.
@@ -190,7 +190,7 @@ class AccountTransformer {
 	}
 
 	function escapeDbName($name) {
-		if ( in_array($name, static::$__reservedMySQLWords)) {
+		if ( in_array($name, self::$__reservedMySQLWords)) {
 			$name = '`'.$name.'`';
 		}
 		return $name;

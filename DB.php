@@ -21,14 +21,14 @@ class DB {
 	 * @return handler DB connection lazy loading
 	 */
 	static function cn() {
-		if ( empty ( static::$_dbh) ) {
-			static::$_dbh = new PDO(
-						static::$_connectionString,
-						static::$_user,
-						static::$_pass );
-			static::$_dbh->exec("SET TIME_ZONE='+00:00'");
+		if ( empty ( self::$_dbh) ) {
+			self::$_dbh = new PDO(
+						self::$_connectionString,
+						self::$_user,
+						self::$_pass );
+			self::$_dbh->exec("SET TIME_ZONE='+00:00'");
 		}
-		return static::$_dbh;
+		return self::$_dbh;
 	}
 
 	/**
@@ -39,7 +39,7 @@ class DB {
 	static function getLogStmt( $days=3 ) {
 
 		try {
-			$dbh = static::cn();
+			$dbh = self::cn();
 			$stmt = $dbh->prepare(
 			"SELECT
 				LogId,
@@ -74,7 +74,7 @@ class DB {
 	static function getUnsyncedLogStmt( $lastLogId) {
 
 		try {
-			$dbh = static::cn();
+			$dbh = self::cn();
 			$stmt = $dbh->prepare(
 			"SELECT
 				LogId,
@@ -107,7 +107,7 @@ class DB {
 	 */
 	static function getLastLogId() {
 		try {
-			$dbh = static::cn();
+			$dbh = self::cn();
 			// ErrorLogs column or StocksWithErrors     column or Local Date Time
 			$stmt = $dbh->query(
 					"SELECT MAX(LastLogId) FROM log_export_trace ORDER BY LastLogId DESC LIMIT 1");
@@ -127,7 +127,7 @@ class DB {
 	 */
 	static function storeLastLogId( $lastLogId) {
 		try {
-			$dbh = static::cn();
+			$dbh = self::cn();
 			// ErrorLogs column or StocksWithErrors     column or Local Date Time
 			$stmt = $dbh->prepare( "INSERT IGNORE INTO log_export_trace (LastLogId) VALUES (?)");
 			$stmt->execute( array($lastLogId));
@@ -144,7 +144,7 @@ class DB {
 	 */
 	static function execute( $statement, $parameters = array() ) {
 		try {
-			$stmt = static::prepare( $statement );
+			$stmt = self::prepare( $statement );
 			/** @var PDOStatement */
 			$stmt->execute( $parameters);
 			if ((int)$stmt->errorCode()!=0) {
@@ -164,7 +164,7 @@ class DB {
 	 */
 	static function prepare( $statement, $options = array() ) {
 		try {
-			$dbh = static::cn();
+			$dbh = self::cn();
 			$stmt = $dbh->prepare( $statement, $options );
 			return $stmt;
 		} catch (PDOException $e) {
