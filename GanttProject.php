@@ -22,8 +22,6 @@ function TaskDuration($el) {
 /**
  * Account project XML document transfromer into
  * Gantt Project version 2.5 'Praha' XML format
- *
- * @author Radomirs Cirskis (nad2000@gmail.com)
  */
 class GanttProject {
 

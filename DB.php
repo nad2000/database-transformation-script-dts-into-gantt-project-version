@@ -1,8 +1,6 @@
 <?php
 /**
  * Data access component
- *
- * @author Rad Cirskis (nad2000@gmail.com)
  */
 
 class DB {
